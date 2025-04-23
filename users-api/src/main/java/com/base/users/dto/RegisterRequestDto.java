@@ -1,35 +1,9 @@
-package com.base.users.model;
+package com.base.users.dto;
 
-import jakarta.persistence.*;
-
-@Entity
-public class BaseUser {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+public class RegisterRequestDto {
     private String username;
-
-    @Column(unique = true)
     private String email;
-
     private String password;
-
-//    private String role;
-
-
-    public BaseUser() {
-    }
-
-    public BaseUser(String username, String email, String password) {
-        this.username = username;
-        this.email = email;
-        this.password = password;
-    }
-
-    public Long getId() {
-        return id;
-    }
 
     public String getUsername() {
         return username;
@@ -55,3 +29,5 @@ public class BaseUser {
         this.password = password;
     }
 }
+
+
