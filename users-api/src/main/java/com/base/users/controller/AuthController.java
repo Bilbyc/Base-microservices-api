@@ -1,5 +1,6 @@
 package com.base.users.controller;
 
+import com.base.users.dto.AuthRequestDto;
 import com.base.users.model.BaseUser;
 import com.base.users.security.JwtUtil;
 import com.base.users.service.UserService;
@@ -18,9 +19,9 @@ import java.util.Collections;
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
-    private AuthenticationConfiguration authenticationConfiguration;
-    private UserService userService;
-    private JwtUtil jwtUtil;
+    private final AuthenticationConfiguration authenticationConfiguration;
+    private final UserService userService;
+    private final JwtUtil jwtUtil;
 
     public AuthController(AuthenticationConfiguration authenticationConfiguration, UserService userService, JwtUtil jwtUtil) {
         this.authenticationConfiguration = authenticationConfiguration;
@@ -34,11 +35,11 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody BaseUser user) throws Exception {
+    public ResponseEntity<?> login(@RequestBody AuthRequestDto user) throws Exception {
         Authentication auth = authenticationConfiguration.getAuthenticationManager().authenticate(
-                new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword())
+                new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword())
         );
-        String token = jwtUtil.generateToken(user.getUsername());
+        String token = jwtUtil.generateToken(user.getEmail());
         return ResponseEntity.ok(Collections.singletonMap("token", token));
     }
 }
