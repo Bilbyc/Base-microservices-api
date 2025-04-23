@@ -1,8 +1,14 @@
 package com.base.users.dto;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class RegisterRequestDto {
+
+    @NotBlank(message = "Campo username é obrigatório")
     private String username;
+    @NotBlank(message = "Campo email é obrigatório")
     private String email;
+    @NotBlank(message = "Campo password é obrigatório")
     private String password;
 
     public String getUsername() {
