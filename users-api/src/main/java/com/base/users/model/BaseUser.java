@@ -21,8 +21,7 @@ public class BaseUser {
     public BaseUser() {
     }
 
-    public BaseUser(Long id, String username, String email, String password) {
-        this.id = id;
+    public BaseUser(String username, String email, String password) {
         this.username = username;
         this.email = email;
         this.password = password;

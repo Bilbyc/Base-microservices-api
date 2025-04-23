@@ -1,5 +1,6 @@
 package com.base.users.service;
 
+import com.base.users.dto.RegisterRequestDto;
 import com.base.users.model.BaseUser;
 import org.springframework.security.core.userdetails.User;
 import com.base.users.repository.UserRepository;
@@ -32,7 +33,12 @@ public class UserService implements UserDetailsService {
         );
     }
 
-    public BaseUser save(BaseUser user) {
+    public BaseUser save(RegisterRequestDto registerDto) {
+        BaseUser user = new BaseUser(
+                registerDto.getUsername(),
+                registerDto.getEmail(),
+                registerDto.getPassword()
+        );
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         return userRepository.save(user);
     }

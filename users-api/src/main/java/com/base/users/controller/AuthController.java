@@ -1,6 +1,7 @@
 package com.base.users.controller;
 
 import com.base.users.dto.AuthRequestDto;
+import com.base.users.dto.RegisterRequestDto;
 import com.base.users.model.BaseUser;
 import com.base.users.security.JwtUtil;
 import com.base.users.service.UserService;
@@ -30,8 +31,9 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody BaseUser baseUser) {
-        return ResponseEntity.ok(userService.save(baseUser));
+    public ResponseEntity<?> register(@RequestBody RegisterRequestDto registerDto) {
+
+        return ResponseEntity.ok(userService.save(registerDto));
     }
 
     @PostMapping("/login")
